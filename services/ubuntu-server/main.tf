@@ -5,7 +5,9 @@ resource "proxmox_vm_qemu" "ubuntu_server" {
   target_node = var.proxmox_node
   vmid        = var.vm_id
 
-  clone = var.vm_template
+  boot   = "order=scsi0"
+  clone  = var.vm_template
+  scsihw = "virtio-scsi-single"
 
   cpu {
     cores   = var.vm_cores
@@ -19,11 +21,21 @@ resource "proxmox_vm_qemu" "ubuntu_server" {
   onboot  = true
   startup = "order=1"
 
+  vm_state         = "running"
+  automatic_reboot = true
+
   disks {
     scsi {
       scsi0 {
         disk {
           size    = var.vm_disk_size
+          storage = "local-lvm"
+        }
+      }
+    }
+    ide {
+      ide1 {
+        cloudinit {
           storage = "local-lvm"
         }
       }
@@ -36,13 +48,21 @@ resource "proxmox_vm_qemu" "ubuntu_server" {
     bridge = "vmbr0"
   }
 
-  os_type   = "cloud-init"
-  ipconfig0 = "ip=${var.vm_ip_address},gw=${var.vm_gateway}"
-
+  # Cloud Init Configuration
+  cicustom   = "vendor=local:snippets/qemu-guest-agent.yml" # /var/lib/vz/snippets/qemu-guest-agent.yml
+  ciupgrade  = true
   nameserver = var.vm_nameservers
+  ipconfig0  = "ip=${var.vm_ip_address},gw=${var.vm_gateway},ip6=dhcp"
+  skip_ipv6  = true
+  ciuser     = var.vm_user
+  sshkeys    = var.ssh_public_key
 
-  ciuser  = var.vm_user
-  sshkeys = var.ssh_public_key
+  serial {
+    id = 0
+  }
+  #os_type   = "cloud-init"
+
+
 
   lifecycle {
     ignore_changes = [
