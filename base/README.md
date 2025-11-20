@@ -1,1 +1,0 @@
-Check the [proxmox provider documentation](https://search.opentofu.org/provider/telmate/proxmox/latest) about the user setup. 

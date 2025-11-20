@@ -1,5 +1,0 @@
-proxmox_api_url  = "https://proxmox.local:8096/api2/json"
-proxmox_user     = "terraform@pve"
-proxmox_password = "your-password"
-proxmox_node     = "pve1"
-gateway          = "10.0.0.1"

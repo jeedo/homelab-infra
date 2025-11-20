@@ -1,0 +1,10 @@
+inputs = {
+  proxmox_api_url   = "https://proxmox.local/api2/json"
+  proxmox_user      = "terraform-prov@pve"
+  proxmox_password  = "supplied-password"
+  proxmox_node      = "proxmox"
+  gateway           = "10.0.0.1"
+  ssh_public_key    = "ssh-ed25519 ssh-public-key-example user@host"
+  foo_ip_address    = "10.0.0.101/24"
+  ubuntu_ip_address = "10.0.0.102/24"
+}
