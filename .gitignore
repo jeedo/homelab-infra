@@ -49,3 +49,7 @@ secrets*.tf
 .env
 .env.*
 !.env.example
+
+# Terragrunt
+.terragrunt-cache
+common.hcl

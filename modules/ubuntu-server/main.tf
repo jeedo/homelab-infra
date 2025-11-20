@@ -1,4 +1,4 @@
-# This file contains shared infrastructure that services depend on 
+# Shared module forterr creating Ubuntu Server VMs on Proxmox
 
 resource "proxmox_vm_qemu" "ubuntu_server" {
   name        = var.vm_name

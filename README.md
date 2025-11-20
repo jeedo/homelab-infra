@@ -4,7 +4,10 @@ Opentofu for my homelab
 
 # Setup
 
-1. Install pre-commit as a uv tool
+1. Install [opentofu](https://opentofu.io/) (opensource terraform fork)
+2. Install [terragrunt](https://terragrunt.gruntwork.io/) (tofu wrapper that can manage an entire stack)
+3. Install [uv](https://uv.sh/) (best python environment and package manager)
+3. Install pre-commit as a uv tool
 ```
 uv tool install pre-commit --with pre-commit-uv
 pre-commit install
